@@ -1,0 +1,12 @@
+---
+- name: install pip
+  apt: name=python-pip state=present
+
+- name: Install flask
+  pip: name=Flask
+
+- name: Create app dir
+  file: path=/opt/mj_awesome_app state=directory mode=0755
+
+- name: Copy app
+  copy: src=hello_world.py dest=/opt/mj_awesome_app/hello_world.py mode=0755
