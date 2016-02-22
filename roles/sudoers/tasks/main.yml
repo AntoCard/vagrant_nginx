@@ -1,0 +1,8 @@
+---
+- name: ensure Vagrant is a sudoer with nopasswd
+  copy: content="vagrant ALL=(ALL) NOPASSWD:ALL" dest=/etc/sudoers.d/10_vagrant mode=0440 owner=root group=root
+  sudo: yes
+
+- name: ensure Admin group is a sudoer with nopasswd
+  copy: content="%admin ALL=(ALL) NOPASSWD:ALL" dest=/etc/sudoers.d/20_admins mode=0440 owner=root group=root
+  sudo: yes
