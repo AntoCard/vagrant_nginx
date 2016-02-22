@@ -1,0 +1,5 @@
+- name: restart app
+  supervisorctl: name=mj_awesome_app state=restarted
+
+- name: restart supervisor
+  service: name=supervisor state=restarted

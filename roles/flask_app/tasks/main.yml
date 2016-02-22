@@ -5,8 +5,25 @@
 - name: Install flask
   pip: name=Flask
 
+- name: Install Supervisor
+  apt: name=supervisor
+
 - name: Create app dir
   file: path=/opt/mj_awesome_app state=directory mode=0755
 
+- name: Create app log dir
+  file: path=/var/log/supervisord state=directory mode=0755
+
 - name: Copy app
   copy: src=hello_world.py dest=/opt/mj_awesome_app/hello_world.py mode=0755
+  notify: restart app
+
+- name: Copy supervisor conf
+  copy: src=hello_world_supervisor.conf dest=/etc/supervisor/conf.d/hello_world_supervisor.conf mode=0644
+  notify: restart supervisor
+
+- name: Create app user
+  user: name=appuser shell=/bin/bash
+
+- name: Start app using supervisor
+  supervisorctl: name=mj_awesome_app state=present
