@@ -21,7 +21,9 @@ Vagrant.configure("2") do |config|
            s.inline = "nc $1"
            s.args   = ["-vz localhost 80"]
        end
-
     end
   end
+
+  # can't get this to run after provisioning
+  # config.vm.provision :shell, path: "test_response.py"
 end
