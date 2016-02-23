@@ -1,8 +1,8 @@
 ---
-- name: Install Nginx
+- name: Install mj awesome app in Vagrant
   hosts: all
   become: true
   roles:
-   - role: nginx
    - role: sudoers
    - role: flask_app
+   - role: nginx

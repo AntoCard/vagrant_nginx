@@ -4,3 +4,15 @@
   apt:
     name: nginx
     state: present
+
+- name: Remove default vhost
+  file: path=/etc/nginx/sites-enabled/default state=absent
+
+- name: Copy conf file
+  copy: src=mj_app.conf dest=/etc/nginx/sites-enabled/mj-app.conf
+  notify: restart nginx
+
+- name: Start Nginx
+  service:
+    name: nginx
+    state: started
